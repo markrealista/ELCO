@@ -15,7 +15,7 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 uint8_t gpios[] = {25};
 int gpioCount;
 
-long randNumber; //Variable para enviar aleatoriamente a una dirreción
+long randNumber; 
 int led = 0; //Led inicialmente encendido
 
 //Variables para el altavoz
@@ -24,7 +24,7 @@ int channel = 0;
 int resolution = 8;
 
 uint8_t macSlaves[][6] = {
-  //Envio direcciones especificas. Poner las MACs asociadas a los esp32. Por ejemplo:
+  //Envio a direcciones especificas. Poner las MACs asociadas a los esp32. Por ejemplo:
   //{0x3C, 0x71, 0xBF, 0xA9, 0x45, 0x3C},
   //{0x3C, 0x71, 0xBF, 0xA9, 0x43, 0xF0},
   //{0x3C, 0x71, 0xBF, 0xA9, 0x47, 0x08}
@@ -103,7 +103,7 @@ void send(){
   if (result1 == ESP_OK) {Serial.println("Success");}
   else {Serial.println("Error");}
   
-  randNumber = random(1, 3); //num aleatorio del 1 al 2
+  randNumber = random(1, 3); //numero aleatorio del 1 al 2
   if (randNumber == 1) {
     esp_err_t result = esp_now_send(macAddr1, (uint8_t*) &values, sizeof(values));
     Serial.print("Send Status: ");
@@ -167,6 +167,7 @@ void loop() {
     if (led == 0) {
       colorWipe(strip.Color(255, 0, 0), 0); // Red
       led = 1;
+      
       ledcWriteTone(channel, 900);
       ledcWrite(channel, 125);
       delay(500);
